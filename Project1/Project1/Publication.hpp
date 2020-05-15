@@ -6,7 +6,6 @@
 class Publication {
 	char* content;
 	unsigned serial;
-protected:
 	void setContent(char const*);
 	virtual void copy(Publication const& other);
 public:

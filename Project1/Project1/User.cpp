@@ -1,11 +1,12 @@
 #include "User.hpp"
 #include <cstring>
 
-User::User(char const* n, unsigned a) :age(a) {
+User::User(char const* n, unsigned a, bool ib) :name(nullptr) ,age(a), isBlocked(ib) {
 	setName(n);
 }
 
 void User::setName(char const* str) {
+	delete[] name;
 	name = new(std::nothrow) char[strlen(str) + 1];
 	strcpy(name, str);
 }
@@ -20,12 +21,15 @@ User::User(User const& other) {
 
 void User::copy(User const& other) {
 	age = other.age;
-	changeName(other.name);
+	setName(other.name);
 }
 
-void User::changeName(char const* str) {
-	delete[] name;
-	setName(str);
+void User::addPublication(Publication const&) const
+{
+}
+
+void User::deletePublication(unsigned serial) const
+{
 }
 
 User& User::operator=(User const& other) {
