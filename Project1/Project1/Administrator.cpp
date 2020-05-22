@@ -1,15 +1,21 @@
 #include "Administrator.hpp"
 
-Administrator::Administrator(const char* n, unsigned a) : User(n, a)
+Administrator::Administrator(SocialNetwork*& sn, UserSystem*& us, const char* n, unsigned a, bool ib) : User(sn, n, a, ib),
+	Moderator(sn, us, n, a, ib)
 {
+	uSystem->hasAdmin = true;
 }
 
-void Administrator::addUser(User& u, User** arr, size_t pos)
+
+void Administrator::addUser(User* u)
 {
-	//TODO: if not alredy there but on the next level
-	if (typeid(u) != typeid(Administrator))
-		arr[pos] = &u;
-	else
-		std::cout << "Error! User is not added!" << std::endl;
+	uSystem->addUser(u);
 }
+
+void Administrator::removeUser(const char* name)
+{
+	uSystem->removeUser(name);
+}
+
+
 

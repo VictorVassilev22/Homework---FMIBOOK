@@ -1,26 +1,57 @@
 #include "Moderator.hpp"
-#include"Administrator.hpp"
 
-Moderator::Moderator(char const* n, unsigned a, bool ib) : User(n,a,ib)
+Moderator::Moderator(SocialNetwork*& sn, UserSystem*& us, char const* n, unsigned a, bool ib) : User(sn, n,a,ib), uSystem(us)
 {
 }
 
-void Moderator::deletePublication(unsigned serial) const
+Moderator& Moderator::operator=(Moderator const& other)
 {
+	if (this != &other) {
+		User::operator=(other);
+		uSystem = other.uSystem;
+	}
+	return *this;
 }
 
-void Moderator::blockUser(User& u) const
+void Moderator::deletePublication(unsigned serial)
 {
-	if (!u.getIsBlocked() && typeid(u)!=typeid(Administrator)) {
-		std::cout << getName() << " blocks " << u.getName() << std::endl;
-		u.isBlocked = true;
+	int index = snetwork->searchPublication(serial);
+	if (index >= 0)
+		snetwork->deletePublication(index);
+	else
+		std::cout << "Publication not found!" << std::endl;
+}
+
+void Moderator::blockUser(char const* name) const
+{
+	int index = uSystem->searchUser(name);
+
+	if (index < 0) {
+		std::cout << "Invalid user, cannot block!" << std::endl;
+		return;
+	}
+
+	User* u = uSystem->getUser(index);
+
+	if (!u->getIsBlocked()) {
+		std::cout << getName() << " blocks " << u->getName() << std::endl;
+		u->isBlocked = true;
 	}
 }
 
-void Moderator::unblockUser(User& u) const
+void Moderator::unblockUser(char const* name) const
 {
-	if (u.getIsBlocked()) {
-		std::cout << getName() << " unblocks " << u.getName() << std::endl;
-		u.isBlocked = false;
+	int index = uSystem->searchUser(name);
+
+
+	if (index < 0) {
+		std::cout << "Invalid user, cannot unblock!" << std::endl;
+		return;
+	}
+
+	User* u = uSystem->getUser(index);
+	if (u->getIsBlocked()) {
+		std::cout << getName() << " unblocks " << u->getName() << std::endl;
+		u->isBlocked = false;
 	}
 }
