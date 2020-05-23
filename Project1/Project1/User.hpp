@@ -4,6 +4,7 @@
 #include "Publication.hpp"
 #include "SocialNetwork.hpp"
 
+const size_t MAX_USERNAME_SIZE = 20;
 
 class User{
 	friend class Moderator;
@@ -30,6 +31,7 @@ public:
 	unsigned getAge() const { return age; }
 	SocialNetwork*& getSocialNetwork()  { return snetwork; }
 	void viewPublication(unsigned) const;
+	unsigned getPostsCount() const { return snetwork->getPostsCount(name); }
 };
 
 #endif

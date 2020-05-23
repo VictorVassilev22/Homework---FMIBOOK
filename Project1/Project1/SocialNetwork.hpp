@@ -52,6 +52,7 @@ public:
 	Publication& getPublication(unsigned) const;
 	void viewAllUserPublications(char const []) const;
 	int searchPublication(unsigned) const;
+	unsigned getPostsCount(char const []) const;
 };
 
 #endif

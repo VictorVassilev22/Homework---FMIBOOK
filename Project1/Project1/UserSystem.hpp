@@ -34,6 +34,13 @@ class UserSystem {
 	void initUsers(User**, size_t);
 	void copyUsers(User**, User**);
 	void removeUserPosts(int index);
+
+	unsigned getUsersCount() const;
+	unsigned getModeratorsCount() const;
+	char* getUserWithMostPosts(unsigned&) const;
+	void getBlockedUsers() const;
+	char* getYoungest(unsigned&) const;
+	char* getOldest(unsigned&) const;
 public:
 	//void reallocUsers();
 	UserSystem();
@@ -44,6 +51,8 @@ public:
 	size_t getCapacity() const { return capacity; }
 	int searchUser(char const*) const;
 	User* getUser(size_t i) const { return users[i]; }
+	void printInfo() const;
+	
 };
 
 #endif

@@ -4,7 +4,6 @@
 //#include "SocialNetwork.hpp"
 using namespace std;
 const size_t SIZE = 100;
-const size_t MAX_USERNAME_SIZE = 20;
 const size_t MAX_COMMAND = 20;
 const size_t MAX_LINE = 2000;
 const size_t MAX_USERTYPE_NAME = 10;
@@ -94,7 +93,7 @@ void addUser(Administrator& admin, const char user_type[]) {
 
 void showInfo(Administrator& admin) {
 	cout << "showing information..." << endl;
-	//TODO
+	admin.getUserSystem()->printInfo();
 }
 
 void removeUser(Administrator& admin, int index) {

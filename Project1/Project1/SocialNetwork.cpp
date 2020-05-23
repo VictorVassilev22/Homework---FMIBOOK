@@ -212,3 +212,14 @@ int SocialNetwork::searchPublication(unsigned serial) const
 	}
 	return -1;
 }
+
+unsigned SocialNetwork::getPostsCount(char const user_name[]) const
+{
+	unsigned count = 0;
+	for (size_t i = 0; i < size; i++)
+	{
+		if (strcmp(publics[i]->getPosterName(), user_name)==0)
+			count++;
+	}
+	return count;
+}
