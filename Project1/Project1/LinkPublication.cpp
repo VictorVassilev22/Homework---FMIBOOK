@@ -8,17 +8,21 @@ LinkPublication::LinkPublication(const char* c, const char* un, unsigned s) :Pub
 {
 }
 
-void LinkPublication::showPublication(bool isOnly, std::ofstream& myfile) const
+void LinkPublication::showPublication(bool isOnly/*, std::ofstream& myfile*/) const
 {
 	if (isOnly)
-		Publication::showPublication(isOnly, myfile);
+		Publication::showPublication(isOnly/*, myfile*/);
 
-	myfile.open(NETWORK_PAGE_NAME, std::ios::out | std::ios::app);
+	std::ofstream myfile;
+	myfile.open(my_page, std::ios::out | std::ios::app);
+	if (myfile.is_open()) {
 
-	if (!isOnly)	myfile << "<p>";
+		if (!isOnly)
+			myfile << "<p>";
 
 
-	myfile << " link publication:</p> ";
-	myfile << "<a href=\"" << getContent() << "\">  View " << getPosterName() << "\'s shared link </a>";
-	myfile.close();
+		myfile << " link publication:</p> ";
+		myfile << "<a href=\"" << getContent() << "\">  View " << getPosterName() << "\'s shared link </a>";
+		myfile.close();
+	}
 }

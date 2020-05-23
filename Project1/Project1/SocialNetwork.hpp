@@ -27,8 +27,8 @@ class SocialNetwork {
 
 	Publication** publics;
 
-	size_t& size;
-	size_t& capacity;
+	size_t size;
+	size_t capacity;
 
 	void clearPublications();
 

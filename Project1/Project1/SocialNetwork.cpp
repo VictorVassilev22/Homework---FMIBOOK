@@ -59,9 +59,9 @@ bool SocialNetwork::checkThreshold(bool c) const
 	}
 }
 
-SocialNetwork::SocialNetwork() : size(size_initializer_s), capacity(capacity_initializer_s)
+SocialNetwork::SocialNetwork() : size(INIT_SIZE), capacity(INIT_CAP)
 {
-	std::ofstream myfile(NETWORK_PAGE_NAME, std::ios::trunc);
+	std::ofstream myfile(my_page, std::ios::trunc);
 	myfile << "<p>Nothing to show currently!</p>";
 
 	publics = new(std::nothrow) Publication * [capacity];
@@ -78,9 +78,6 @@ SocialNetwork::SocialNetwork(SocialNetwork const& other) : size(other.size),
 	capacity(other.capacity)
 {
 	publics = other.publics;
-	/*publics = new(std::nothrow) Publication * [capacity];
-	initPublications(publics);
-	copyPublications(publics, other.publics);*/
 }
 
 SocialNetwork& SocialNetwork::operator=(SocialNetwork const& other)
@@ -89,9 +86,6 @@ SocialNetwork& SocialNetwork::operator=(SocialNetwork const& other)
 		size = other.size;
 		capacity = other.capacity;
 		publics = other.publics;
-		/*publics = new(std::nothrow) Publication * [capacity];
-		initPublications(publics);
-		copyPublications(publics, other.publics);*/
 	}
 	return *this;
 }
@@ -193,15 +187,18 @@ Publication& SocialNetwork::getPublication(unsigned serial) const
 void SocialNetwork::viewAllUserPublications(char const name[]) const
 {
 	std::ofstream myfile;
-	myfile.open(NETWORK_PAGE_NAME, std::ios::out | std::ios::trunc);
-	myfile << "<p>"<< name << "\'s publications: " << " </p> ";
-	myfile.close();
+	myfile.open(my_page, std::ios::out | std::ios::trunc);
+	if (myfile.is_open()) {
+		myfile << "<p>" << name << "\'s publications: </p> ";
+		myfile.close();
+	}
+
 	Publication* p;
 	for (size_t i = 0; i < size; i++)
 	{
 		p = publics[i];
 		if (strcmp(p->getPosterName(), name) == 0) {
-			p->showPublication(false, myfile);
+			p->showPublication(false/*, myfile*/);
 		}
 	}
 }

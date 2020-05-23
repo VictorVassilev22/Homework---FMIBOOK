@@ -132,7 +132,7 @@ void memory_error() {
 }
 
 
-UserSystem::UserSystem() : size(size_initializer_u), capacity(capacity_initializer_u), hasAdmin(false)
+UserSystem::UserSystem() : size(INIT_SIZE), capacity(INIT_CAP), hasAdmin(false)
 {
 	users = new(std::nothrow) User * [capacity];
 	if (!users) {

@@ -18,8 +18,8 @@ class UserSystem {
 
 	User** users;
 
-	size_t& size;
-	size_t& capacity;
+	size_t size;
+	size_t capacity;
 
 	bool hasAdmin;
 

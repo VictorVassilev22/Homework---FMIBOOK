@@ -8,18 +8,19 @@ ImagePublication::ImagePublication(const char* c , const char* un, unsigned s) :
 {
 }
 
-void ImagePublication::showPublication(bool isOnly, std::ofstream& myfile) const
+void ImagePublication::showPublication(bool isOnly/*, std::ofstream& myfile*/) const
 {
 
 	if (isOnly)
-		Publication::showPublication(isOnly, myfile);
+		Publication::showPublication(isOnly/*, myfile*/);
 
-	myfile.open(NETWORK_PAGE_NAME, std::ios::out | std::ios::app);
-
-	if(!isOnly)	myfile << "<p>";
-
-
-	myfile << " image publication:</p> ";
-	myfile << "<img src=\"" << getContent() << "\" alt=\""<<getPosterName()<<" posted an image\">";
-	myfile.close();
+	std::ofstream myfile;
+	myfile.open(my_page, std::ios::out | std::ios::app);
+	if(myfile.is_open()){
+		if (!isOnly)	
+			myfile << "<p>";
+		myfile << " image publication:</p> ";
+		myfile << "<img src=\"" << getContent() << "\">";
+		myfile.close();
+	}
 }

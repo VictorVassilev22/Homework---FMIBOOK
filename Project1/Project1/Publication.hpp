@@ -4,8 +4,8 @@
 #include<iostream>
 #include<fstream>
  
-const char NETWORK_PAGE_NAME[10] = "page.html";
 static unsigned serialHolder = 1;
+const char my_page[10] = "page.html";
 
 class Publication {
 
@@ -27,7 +27,7 @@ public:
 	char* getPosterName() const;
 	Publication(Publication const& other);
 	Publication& operator=(Publication const& other);
-	virtual void showPublication(bool, std::ofstream&) const;
+	virtual void showPublication(bool/*, std::ofstream&*/) const;
 
 };
 

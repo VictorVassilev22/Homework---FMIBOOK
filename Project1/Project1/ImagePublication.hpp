@@ -6,7 +6,7 @@ class ImagePublication : virtual public Publication {
 public:
 	ImagePublication(const char* pName = "UNKNOWN", const char* content = "UNKNOWN");
 	ImagePublication(const char*, const char* , unsigned);
-	void showPublication(bool, std::ofstream&) const;
+	void showPublication(bool/*, std::ofstream&*/) const;
 };
 
 #endif

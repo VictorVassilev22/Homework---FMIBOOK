@@ -84,7 +84,7 @@ char* User::getName() const
 
 void User::viewPublication(unsigned serial) const
 {
-	std::ofstream myfile;
-	snetwork->getPublication(serial).showPublication(true, myfile);
+	//std::ofstream myfile;
+	snetwork->getPublication(serial).showPublication(true/*, myfile*/);
 }
 

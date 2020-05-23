@@ -20,14 +20,17 @@ Publication::Publication(char const* c, char const* un, unsigned s)
 	setContent(c);
 }
 
-void Publication::showPublication(bool isOnly, std::ofstream& myfile) const
+void Publication::showPublication(bool isOnly/*, std::ofstream& myfile*/) const
 {
-	myfile.open(NETWORK_PAGE_NAME, std::ios::out | std::ios::trunc);
-	if(strcmp("UNKNOWN", poster_name)==0)
-		myfile << "<p>" << "Nothing to show here!" << " </p> ";
-	else
-		myfile << "<p>" << poster_name << " posted ";
-	myfile.close();
+	std::ofstream myfile;
+	myfile.open(my_page, std::ios::out | std::ios::trunc);
+	if (myfile.is_open()) {
+		if (strcmp("UNKNOWN", poster_name) == 0)
+			myfile << "<p>" << "Nothing to show here!" << " </p> ";
+		else
+			myfile << "<p>" << poster_name << " posted ";
+		myfile.close();
+	}
 
 }
 
